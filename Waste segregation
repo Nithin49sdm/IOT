@@ -1,1 +1,36 @@
 
+
+ #include <Servo.h>
+ int sen=8;
+Servo myservo;  // create servo object to control a servo
+       int pos = 0;       
+int x;
+void setup() {
+  // put your setup code here, to run once:
+   myservo.attach(9);
+pinMode(sen,INPUT);
+Serial.begin(9600);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+x=digitalRead(sen);
+Serial.println(x);
+if(x==HIGH)
+serv();
+delay(500);
+}
+void serv(){
+for(pos = 0; pos <60; pos += 1)  // goes from 0 degrees to 180 degrees
+ {                                  // in steps of 1 degree
+    myservo.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(10);                       // waits 15ms for the servo to reach the position
+ }
+ delay(1250);
+ for(pos =60; pos>=1; pos-=1)     // goes from 180 degrees to 0 degrees
+ {
+    myservo.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(10);                       // waits 15ms for the servo to reach the position
+ }
+// delay(2500);
+}
